@@ -2,10 +2,22 @@
 
   <h2><%= @cocktail.name %></h1>
 
+    <ul>
+<% @cocktail.doses.each do |d| %>
+<li>
+ <%= d.description %>
+ <%= d.ingredient.name %>
+ <%= link_to "Delete", dose_path(d.id),
+     method: :delete,
+     data: { confirm: "Are you sure?" } %>
+</li>
+<% end %>
+</ul>
 
-    <h3>Ingredients: ??? </h3>
+<%= link_to "Add a dose", new_cocktail_dose_path(Cocktail.find(params[:id])), class: "btn btn-primary" %>
+
 
       <p>
-      <%= link_to "Back to list of cocktails", cocktails_path %>
+      <%= link_to "Back to list of cocktails", cocktails_path, class: "btn btn-danger" %>
       </p>
 
